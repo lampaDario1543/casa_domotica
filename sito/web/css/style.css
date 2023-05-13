@@ -1,0 +1,42 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+:root{
+    --mainColor:#ffffff;
+}
+*{
+    user-select: none;
+    margin: 0;
+    padding: 0;
+}
+body{
+    margin: 1%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.title{
+    font-size: 5rem;
+    font-family: Bebas Neue;
+}
+.switch{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 2%;
+    font-family: Calibri;
+    font-size: 1.5rem;
+    border: solid black 2px;
+    border-radius: 15px;
+    margin-right: 15px;
+}
+.switches{
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.switch:hover{
+    cursor: pointer;
+    background-color: #e6e6e6;
+}
