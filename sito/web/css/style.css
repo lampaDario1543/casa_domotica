@@ -40,3 +40,22 @@ body{
     cursor: pointer;
     background-color: #e6e6e6;
 }
+.temperature-container{
+    font-family: Calibri;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: 2%;
+    border: 2px solid black;
+    border-radius: 15px;
+    padding:5%;
+    margin-bottom: 2%;
+}
+.temperature{
+    display: flex;
+    flex-direction: row;
+}
+.temperature p{
+    font-size: 1.5rem;
+    margin-left: 2%;
+}
