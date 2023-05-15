@@ -1,33 +1,32 @@
 <!DOCTYPE html>
 <html lang="it">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Casa Domotica</title>
-    <script type="text/javascript" src="/eel.js"></script>
-    <script src="script.js"></script>
-    <link rel="stylesheet" href="css/style.css">
-</head>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Casa Domotica</title>
+        <script type="text/javascript" src="/eel.js"></script>
+        <script src="script.js"></script>
+        <link rel="stylesheet" href="css/style.css">
+    </head>
 
-<body>
-    <h1 class="title">Casa domotica</h1>
-    <div class="temperature-container">
-        <div class="temperature">
-            <h2 class="temperature-title">Temperatura:</h2>
-            <p class="temperature-value" id="temperature"></p><p>°C</p>
+    <body>
+        <h1 class="title">Casa domotica</h1>
+        <div class="temperature-container">
+            <div class="temperature">
+                <h2 class="temperature-title">Temperatura:</h2>
+                <p class="temperature-value" id="temperature"></p><p>°C</p>
+            </div>
+            <div class="temperature">
+                <h2 class="temperature-title">Umidità:</h2>
+                <p class="temperature-value" id="humidity"></p><p>%</p>
+            </div>
         </div>
-        <div class="temperature">
-            <h2 class="temperature-title">Umidità:</h2>
-            <p class="temperature-value" id="humidity"></p><p>%</p>
+        <div class="switches">
+            <a class="switch" id="cucina" onclick="cucina()">Cucina</a>
+            <a class="switch" id="salotto" onclick="salotto()">Salotto</a>
+            <a class="switch" id="bedroom" onclick="bedroom()">Camera da letto    </a>
         </div>
-    </div>
-    <div class="switches">
-        <a class="switch" id="cucina" onclick="cucina()">Cucina</a>
-        <a class="switch" id="salotto" onclick="salotto()">Salotto</a>
-        <a class="switch" id="bedroom" onclick="bedroom()">Camera da letto    </a>
-        
-    </div>
-</body>
+    </body>
 
 </html>
