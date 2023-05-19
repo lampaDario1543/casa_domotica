@@ -1,10 +1,8 @@
 import eel
 import serial
 import time as t
-port="COM4" #This will be different for various devices and on windows it will probably be a COM port.
+port="COM6" #This will be different for various devices and on windows it will probably be a COM port.
 bluetooth=serial.Serial(port, 115200)#Start communications with the bluetooth unit
-#port_in="COM6"
-#bluetooth_in=serial.Serial(port_in, 115200)
 t.sleep(5)
 print("Connected")
 eel.init("web")
