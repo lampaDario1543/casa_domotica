@@ -4,7 +4,7 @@ function init(){ //inizializza le varibili boolean facendo una richesta tramite 
 init();
 function cucina() {
     eel.cucina(cucinaIsOn)(() => {
-      console.log("Mandato")
+        console.log("Mandato")
         cucinaIsOn=!cucinaIsOn;
         document.getElementById("cucina").style.backgroundColor = cucinaIsOn? "green" : "red";
     })
@@ -18,9 +18,7 @@ function showCucina(){
 function hideCucina(){
   const modal=document.getElementById("modalCucina");
   $(".cucina-container").hide(500);
-  setTimeout(() => {
-    modal.style.display="none";
-  }, 500);
+  modal.style.display="none";
 }
 
 function showGarage(){
@@ -32,17 +30,12 @@ function showGarage(){
 function hideGarage(){
   const modal=document.getElementById("modalGarage");
   $(".garage-container").hide(500);
-  setTimeout(() => {
     modal.style.display="none";
-  }, 500);
 }
-function garage(){
-  if($("#garage-switch").is(":checked")){
-    eel.cucina(true);
-  }else{
-    eel.cucina(false);
-  }
-};
+function setStatus(room){
+  id="#"+room+"-switch"; //id del checkbox
+  eel.setStatus(room); //call python function
+}
 setInterval(function() {
     eel.getTemperature()(function(result) {
         var temperature = result[0];

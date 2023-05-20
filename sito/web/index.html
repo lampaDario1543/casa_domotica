@@ -20,7 +20,7 @@
                 <div>
                     <!-- Toggle Button Style 11 -->
                     <label class="toggler-wrapper style-11">
-                      <input type="checkbox" id="garage-switch" onchange="garage()">
+                      <input type="checkbox" id="garage-switch" onchange="setStatus('garage')">
                       <div class="toggler-slider">
                         <div class="toggler-knob"></div>
                       </div>
@@ -37,7 +37,7 @@
                 <div>
                     <!-- Toggle Button Style 11 -->
                     <label class="toggler-wrapper style-11">
-                      <input type="checkbox" id="cucina-switch">
+                      <input type="checkbox" id="cucina-switch" onchange="setStatus('cucina')">
                       <div class="toggler-slider">
                         <div class="toggler-knob"></div>
                       </div>
@@ -58,7 +58,7 @@
             </div>
         </div>
         <div class="switches">
-            <a class="switch" id="cucina" onclick="cucina()">Cucina</a>
+            <a class="switch" id="cucina" onclick="showCucina()">Cucina</a>
             <a class="switch" id="salotto" onclick="salotto()">Salotto</a>
             <a class="switch" id="bedroom" onclick="bedroom()">Camera da letto</a>
             <a class="switch" id="garage" onclick="showGarage()">Garage</a>

@@ -7,8 +7,8 @@ t.sleep(5)
 print("Connected")
 eel.init("web")
 @eel.expose
-def cucina(accendi):
-    data = "Accendi " if accendi else "Spegni "
+def setStatus(s):
+    data=s+" "
     bluetooth.write(data.encode())
 @eel.expose
 def getTemperature():
@@ -17,5 +17,4 @@ def getTemperature():
     temp, hum = data.split(",")
     print(temp, hum)
     return [float(temp), float(hum)]
-    #return 0,0
 eel.start("index.html")
