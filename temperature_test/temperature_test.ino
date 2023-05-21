@@ -27,7 +27,7 @@ class Room{ //classe per le stanze
       return ledPin;
     }
 };
-class Garage:public Room{
+class Garage:public Room{ //classe per il garage
   private:
     int stepsPerRevolution = 2048;
     int rolePerMinute = 17;
@@ -40,12 +40,14 @@ class Garage:public Room{
       basculante.setSpeed(rolePerMinute);
     }
 };
+
 //Bluetooth
 String message = "";
 //STANZE
 Room cucina(3); //digital pin 3
-Garage garage(4); //digital pin 4
-
+Room bagno(4); //digital pin 4
+Room camera(5); //digital pin 5
+Garage garage(6); //digital pin 4
 //temperatura casa
 float finalTemperature=0;
 float finalHumidity=0;
@@ -69,6 +71,8 @@ void initialize(){
 void setup() {
   //inizializzo i pin
   pinMode(cucina.getPin(), OUTPUT);
+  pinMode(bagno.getPin(), OUTPUT);
+  pinMode(camera.getPin(), OUTPUT);
   pinMode(garage.getPin(), OUTPUT);
   //imposto la velocità di trasmissione
   Serial.begin(115200);
@@ -86,9 +90,13 @@ void loop() {
           setCucina();
       }else if(message == "garage"){
           setGarage();
-      }else if("getTemp"){
+      }else if(message=="bagno"){
+        setBagno();
+      }else if(message=="getTemp"){
           String temperatureMsg = String(finalTemperature) + "," + String(finalHumidity);
           Serial.println(temperatureMsg);
+      }else if(message=="getAllStates"){
+          getAllStates();
       }
       message = "";
     }else{
@@ -104,6 +112,13 @@ void setCucina(){
     digitalWrite(cucina.getPin(), HIGH);
   cucina.setStatus(!cucina.getStatus());
 }
+void setBagno(){
+  if(bagno.getStatus())
+    digitalWrite(bagno.getPin(), LOW);
+  else
+    digitalWrite(bagno.getPin(), HIGH);
+  bagno.setStatus(!bagno.getStatus());
+}
 //imposta lo stato del garage
 void setGarage(){
   if(garage.getStatus())
@@ -111,4 +126,8 @@ void setGarage(){
   else
     digitalWrite(garage.getPin(), HIGH);
   garage.setStatus(!garage.getStatus());
+}
+void getAllStates(){
+  String state = String(cucina.getStatus())+","+String(bagno.getStatus())+","+String(camera.getStatus())+","+String(garage.getStatus());
+  Serial.println(state);
 }

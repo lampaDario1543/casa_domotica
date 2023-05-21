@@ -1,42 +1,21 @@
-cucinaIsOn=true;
+states=[]
 function init(){ //inizializza le varibili boolean facendo una richesta tramite python ad arduino, dello stato dei LED
-}
-init();
-function cucina() {
-    eel.cucina(cucinaIsOn)(() => {
-        console.log("Mandato")
-        cucinaIsOn=!cucinaIsOn;
-        document.getElementById("cucina").style.backgroundColor = cucinaIsOn? "green" : "red";
-    })
-}
-function showCucina(){
-  const modal=document.getElementById("modalCucina");
-  modal.style.display="flex";
-  $(".cucina-container").show(500);
-}
-
-function hideCucina(){
-  const modal=document.getElementById("modalCucina");
-  $(".cucina-container").hide(500);
-  modal.style.display="none";
-}
-
-function showGarage(){
-  const modal=document.getElementById("modalGarage");
-  modal.style.display="flex";
-  $(".garage-container").show(500);
-}
-
-function hideGarage(){
-  const modal=document.getElementById("modalGarage");
-  $(".garage-container").hide(500);
-    modal.style.display="none";
-}
-function setStatus(room){
-  id="#"+room+"-switch"; //id del checkbox
-  eel.setStatus(room); //call python function
-}
-setInterval(function() {
+  eel.getAllStates()(function(result) {
+    console.log(result);
+    states[0]={room:"cucina",state:result[0]};
+    states[1]={room:"bagno",state:result[1]};
+    states[2]={room:"camera",state:result[2]};
+    states[3]={room:"garage",state:result[3]};
+    for(let i=0;i<states.length;i++){
+      if(states[i].state==true){
+        $("#"+states[i].room+"-switch").prop('checked', true);
+      }
+      else{
+        $("#"+states[i].room+"-switch").prop('checked', false);
+      }
+    }
+  })
+  setInterval(function() {
     eel.getTemperature()(function(result) {
         var temperature = result[0];
         var humidity = result[1];
@@ -44,3 +23,8 @@ setInterval(function() {
       document.getElementById("humidity").innerText = humidity;
     })
   }, 1000);//richiede la temperatura ogni secondo
+}
+init();
+function setStatus(room){ //cambia lo stato dei LED
+  eel.setStatus(room); //call python function
+}
