@@ -47,21 +47,92 @@
             </div>
 		</div>
         <h1 class="title">Casa domotica</h1>
-        <div class="temperature-container">
-            <div class="temperature">
-                <h2 class="temperature-title">Temperatura:</h2>
-                <p class="temperature-value" id="temperature"></p><p>°C</p>
+        <div class="utilities">
+            <div class="utlity-container" id="temperature-container">
+                <div class="temperature">
+                    <h2 class="temperature-title">Temperatura:</h2>
+                    <p class="temperature-value" id="temperature"></p><p>°C</p>
+                </div>
+                <div class="temperature">
+                    <h2 class="temperature-title">Umidità:</h2>
+                    <p class="temperature-value" id="humidity"></p><p>%</p>
+                </div>
             </div>
-            <div class="temperature">
-                <h2 class="temperature-title">Umidità:</h2>
-                <p class="temperature-value" id="humidity"></p><p>%</p>
+            <div class="utlity-container" id="alarm-container">
+                <div class="allarme">
+                    <h2 class="allarme-title">Allarme:</h2>
+                    <div class="switches">
+                        <!-- Toggle Button Style 11 -->
+                        <label class="toggler-wrapper style-11">
+                          <input type="checkbox" id="allarme-switch" onchange="allarme()">
+                          <div class="toggler-slider">
+                            <div class="toggler-knob"></div>
+                          </div>
+                        </label>
+                        <!-- End Toggle Button Style 11 -->
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="switches">
-            <a class="switch" id="cucina" onclick="showCucina()">Cucina</a>
-            <a class="switch" id="salotto" onclick="salotto()">Salotto</a>
-            <a class="switch" id="bedroom" onclick="bedroom()">Camera da letto</a>
-            <a class="switch" id="garage" onclick="showGarage()">Garage</a>
+        <div class="rooms">
+            <div class="room" id="room-cucina">
+                <h2>Cucina</h2>
+                <h3>Luci:</h3>
+                <div class="switches">
+                    <!-- Toggle Button Style 11 -->
+                    <label class="toggler-wrapper style-11">
+                      <input type="checkbox" id="cucina-switch" onchange="setStatus('cucina')">
+                      <div class="toggler-slider">
+                        <div class="toggler-knob"></div>
+                      </div>
+                    </label>
+                    <!-- End Toggle Button Style 11 -->
+                </div>
+            </div>
+            <div class="room" id="room-bagno">
+                <h2>Bagno</h2>
+                <h3>Luci:</h3>
+                <div class="switches">
+                    <!-- Toggle Button Style 11 -->
+                    <label class="toggler-wrapper style-11">
+                      <input type="checkbox" id="bagno-switch" onchange="setStatus('bagno')">
+                      <div class="toggler-slider">
+                        <div class="toggler-knob"></div>
+                      </div>
+                    </label>
+                    <!-- End Toggle Button Style 11 -->
+                </div>
+            </div>
+            <div class="room" id="room-camera">
+                <h2>Camera</h2>
+                <h3>Luci:</h3>
+                <div class="switches">
+                    <!-- Toggle Button Style 11 -->
+                    <label class="toggler-wrapper style-11">
+                      <input type="checkbox" id="camera-switch" onchange="setStatus('camera')">
+                      <div class="toggler-slider">
+                        <div class="toggler-knob"></div>
+                      </div>
+                    </label>
+                    <!-- End Toggle Button Style 11 -->
+                </div>
+            </div>
+            <div class="room" id="room-garage">
+                <h2>Garage</h2>
+                <h3>Luci:</h3>
+                <div class="switches">
+                    <!-- Toggle Button Style 11 -->
+                    <label class="toggler-wrapper style-11">
+                      <input type="checkbox" id="garage-switch" onchange="setStatus('garage')">
+                      <div class="toggler-slider">
+                        <div class="toggler-knob"></div>
+                      </div>
+                    </label>
+                    <!-- End Toggle Button Style 11 -->
+                </div>
+                <h3>Basculante:</h3>
+                <input type="range" name="" id="">
+            </div>
         </div>
     </body>
 

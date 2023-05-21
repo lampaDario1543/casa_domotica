@@ -1,8 +1,10 @@
 #include <SoftwareSerial.h>
 #include <dht_nonblocking.h>
+#include <Stepper.h>
 #define DHT_SENSOR_TYPE DHT_TYPE_11
+
 class Room{ //classe per le stanze
-  private:
+  protected:
     int ledPin;
     boolean ledStatus;
   public:
@@ -25,11 +27,24 @@ class Room{ //classe per le stanze
       return ledPin;
     }
 };
+class Garage:public Room{
+  private:
+    int stepsPerRevolution = 2048;
+    int rolePerMinute = 17;
+    Stepper basculante;
+  public:
+    Garage(int ledPin):Room(ledPin),basculante(stepsPerRevolution, 8, 10, 9, 11){
+      basculante.setSpeed(rolePerMinute);
+    }
+    Garage():Room(),basculante(stepsPerRevolution, 8, 10, 9, 11){
+      basculante.setSpeed(rolePerMinute);
+    }
+};
 //Bluetooth
 String message = "";
 //STANZE
 Room cucina(3); //digital pin 3
-Room garage(4); //digital pin 4
+Garage garage(4); //digital pin 4
 
 //temperatura casa
 float finalTemperature=0;

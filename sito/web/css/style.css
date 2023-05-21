@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
 :root{
-    --mainColor:#1a85c2;
-    --mainBg:#FFC482;
+    --mainColor:#fff;
+    --mainBg:#fff;
 }
 *{
     transition: all ease-in-out;
@@ -16,45 +16,79 @@ body{
     flex-direction: column;
     align-items: center;
     height: 100vh;
-    justify-content: center;
+    font-family: Calibri;
 }
 .title{
+    color: #333333;
     font-size: 5rem;
     font-family: Bebas Neue;
 }
-.switch{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    padding: 2%;
-    font-family: Calibri;
-    font-size: 1.5rem;
-    border: solid black 2px;
-    border-radius: 15px;
-    margin-right: 3%;
-    box-shadow: 2px 5px 10px 2px rgba(0, 0, 0, 0.3);
-}
-.switches{
+.rooms{
     width: 100vw;
     display: flex;
+    flex-direction:row ;
     align-items: center;
     justify-content: center;
 }
-.switch:hover{
-    cursor: pointer;
-    background-color: #e6e6e6;
+.room{
+    margin: 1%;
+    display: flex;
+    flex-direction: column;
+    padding: 3%;
+    border-radius: 15px;
+    height: 15vh;
+    width: 10vw;
+    color: #fff;
+    box-shadow: 2px 5px 10px 2px rgba(0, 0, 0, 0.3);
 }
-.temperature-container{
+.toggler-knob::after{
+    font-size: 2rem;
+}
+#temperature-container{
+    background-color: #2c8a85;
+    color: #fff;
+}
+#alarm-container{
+    background-color: #2C5A45;
+    color: #fff;
+}
+#room-cucina{
+    background-color: #7B2C2C;
+}
+#room-camera{
+    background-color: #2C445A;
+}
+#room-bagno{
+    background-color: #564A2C;
+}
+#room-garage{
+    background-color: #7F5A2C;
+}
+.room h2{
+    font-size: 2rem;
+    font-family: Calibri;
+}
+.switches{
+    margin-top: 5%;
+}
+.utilities{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin: 3%;
+    height: 20vh;
+    width: 100vw;
+}
+.utlity-container{
     font-family: Calibri;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    margin-top: 2%;
-    border: 2px solid black;
     border-radius: 15px;
-    padding:5%;
-    margin-bottom: 2%;
+    padding:3%;
+    max-height: 15vh;
+    margin: 1%;
     box-shadow: 2px 5px 10px 2px rgba(0, 0, 0, 0.3);
 }
 .temperature{
@@ -77,16 +111,6 @@ body{
     font-size: 4rem;
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
     flex-direction: column;
-    transition: all ease-in-out 250ms;
-}
-.room-box{
-    background-color: #ffffff;
-    border-radius:15px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 10%;
     transition: all ease-in-out 250ms;
 }
 .room-box h2{

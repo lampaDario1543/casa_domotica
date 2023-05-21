@@ -51,10 +51,10 @@
   content: 'Off';
   position: absolute;
   top: 50%;
-  right: -25px;
+  right: -40px;
   -webkit-transform: translateY(-50%);
   transform: translateY(-50%);
-  font-size: 25%;
+  font-size: 100%;
   text-transform: uppercase;
   font-weight: 500;
   opacity: 0.7;
