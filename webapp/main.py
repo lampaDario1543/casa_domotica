@@ -11,12 +11,6 @@ def setStatus(s):
     data=s+" "
     bluetooth.write(data.encode())
 @eel.expose
-def getAllStates():
-    bluetooth.write("getAllStates ".encode())
-    data = bluetooth.readline().decode().strip()
-    cucina, bagno, camera, garage = map(int, data.split(","))
-    return [bool(cucina), bool(bagno), bool(camera), bool(garage)]
-@eel.expose
 def getTemperature():
     bluetooth.write("getTemp ".encode())
     data = bluetooth.readline().decode().strip()
