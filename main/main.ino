@@ -104,10 +104,17 @@ void loop() {
       }else if(message=="getTemp"){ 
           String temperatureMsg = String(finalTemperature) + "," + String(finalHumidity);
           Serial.println(temperatureMsg);
+      }else if(message=="getAllStates"){
+        getAllStates();
       }
       message = "";
     }else{
       message += c;
     }
   }
+}
+
+void getAllStates(){
+  String state = String(cucina.getStatus())+","+String(bagno.getStatus())+","+String(camera.getStatus())+","+String(garage.getStatus());
+  Serial.println(state);
 }
