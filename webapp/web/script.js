@@ -4,18 +4,23 @@ function init(){
   setTimeout(() => {
     eel.getAllStates()(function(result) {
       console.log(result);
+      //imposto i valori ricevuti, l'ultima posizione dell'array è riservata alla basculante
       states[0]={room:"cucina",state:result[0]};
       states[1]={room:"bagno",state:result[1]};
       states[2]={room:"camera",state:result[2]};
       states[3]={room:"garage",state:result[3]};
-      for(let i=0;i<states.length;i++){
-        if(states[i].state==true){
+      states[4]={room:"basculante",state:result[4]};
+      for(let i=0;i<states.length-1;i++){ //fino a states.length-1 perchè l'ultimo elemento è la basculante
+        if(states[i].state==1){
           $("#"+states[i].room+"-switch").prop('checked', true);
         }
         else{
           $("#"+states[i].room+"-switch").prop('checked', false);
         }
       }
+      //imposto il valore della basculante nello slider
+      const slider=document.getElementById("basculante-slider");
+      slider.value=(states[states.length-1].state/20);
     })
   }, 1000);
 }

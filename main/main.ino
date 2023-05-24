@@ -148,6 +148,6 @@ void loop() {
 }
 
 void getAllStates(){
-  String state = String(cucina.getStatus())+","+String(bagno.getStatus())+","+String(camera.getStatus())+","+String(garage.getStatus());
+  String state = String(cucina.getStatus())+","+String(bagno.getStatus())+","+String(camera.getStatus())+","+String(garage.getStatus())+","+String(garage.getApertura());
   Serial.println(state);
 }

@@ -18,8 +18,8 @@ def setBasculante(val):
 def getAllStates():
     bluetooth.write("getAllStates ".encode())
     data = bluetooth.readline().decode().strip()
-    cucina, bagno, camera, garage = map(int, data.split(","))
-    return [bool(cucina), bool(bagno), bool(camera), bool(garage)]
+    cucina, bagno, camera, garage, basculante = map(int, data.split(","))
+    return [cucina, bagno, camera, garage, basculante]
 @eel.expose
 def getTemperature():
     bluetooth.write("getTemp ".encode())
