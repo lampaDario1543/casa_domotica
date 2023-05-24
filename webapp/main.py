@@ -11,6 +11,10 @@ def setStatus(s):
     data=s+" "
     bluetooth.write(data.encode())
 @eel.expose
+def setBasculante(val):
+    data="setBasculante-"+str(val)+" "
+    bluetooth.write(data.encode())
+@eel.expose
 def getAllStates():
     bluetooth.write("getAllStates ".encode())
     data = bluetooth.readline().decode().strip()

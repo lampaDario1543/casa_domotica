@@ -37,14 +37,42 @@ class Room{ //classe per le stanze
 class Garage:public Room{
   private:
     int stepsPerRevolution = 2048;
-    int rolePerMinute = 17;
+    int rolePerMinute = 11;
+    const int MAX=stepsPerRevolution+650;
+    int currentOpen;
+    int apertura; //apertura in % della basculante
     Stepper basculante;
   public:
-    Garage(int ledPin):Room(ledPin),basculante(stepsPerRevolution, 8, 10, 9, 11){
+    Garage(int ledPin):Room(ledPin),basculante(stepsPerRevolution, 10, 12, 11, 13){
       basculante.setSpeed(rolePerMinute);
+      apertura=0;
+      currentOpen=0;
     }
-    Garage():Room(),basculante(stepsPerRevolution, 8, 10, 9, 11){
+    Garage():Room(),basculante(stepsPerRevolution, 10, 12, 11, 13){
       basculante.setSpeed(rolePerMinute);
+      apertura=0;
+      currentOpen=0;
+    }
+    void setBasculante(int n){
+      int passiPer;
+      if(n!=0)
+        passiPer= (int)((n / 100.0) * MAX); // Calcolo aggiornato con divisione decimale
+      else
+        passiPer=0;
+      int passi=abs(currentOpen-passiPer);
+      if (n > apertura){
+        basculante.step(-passi); // Apre la basculante
+        currentOpen+=passi;
+      }
+      else if (n < apertura){
+        basculante.step(passi); // Chiude la basculante
+        currentOpen-=passi;
+      }
+      
+      apertura = n; // Aggiorna il valore di apertura
+    }
+    int getApertura(){
+      return apertura;
     }
 };
 //Bluetooth
@@ -106,6 +134,11 @@ void loop() {
           Serial.println(temperatureMsg);
       }else if(message=="getAllStates"){
         getAllStates();
+      }else if(message.startsWith("setBasculante-")){
+        String numeroString = message.substring(14); // Estrapola la parte della stringa dopo il trattino
+        int n= numeroString.toInt();
+        n*=20; //numero in percentuale
+        garage.setBasculante(n);
       }
       message = "";
     }else{

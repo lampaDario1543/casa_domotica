@@ -1,4 +1,4 @@
-states=[]
+states=[] //stati dei vari bottoni e range.
 function init(){
   getTemperature();
   setTimeout(() => {
@@ -17,7 +17,7 @@ function init(){
         }
       }
     })
-  }, 2000);
+  }, 1000);
 }
 init();
 function setStatus(room){
@@ -32,3 +32,12 @@ function getTemperature() {
   })
 }
 setInterval(getTemperature, 5000);//richiede la temperatura ogni 5 secondi
+
+function getBasculante(){
+  $("#submit-button").prop('disabled', true);
+  const slider=document.getElementById("basculante-slider");
+  eel.setBasculante(slider.value);
+  setTimeout(() => {
+    $("#submit-button").prop('disabled', false);
+  }, 5000);
+}
