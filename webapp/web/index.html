@@ -5,7 +5,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Casa Domotica</title>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+        <script src="js/jquery3.6.0.js"></script>
         <script type="text/javascript" src="/eel.js"></script>
         <script src="script.js"></script>
         <link rel="stylesheet" href="css/style.css">
@@ -14,6 +14,20 @@
     </head>
 
     <body>
+      <div class="modal" id="modal">
+        <div class="modal-content">
+          <span id="close" onclick="hideModal()">&times;</span>
+          <div class="panel">
+            <div class="row">
+              <h2>Inserisci la password:</h2>
+            </div>
+            <div class="row">
+            <input type="password" placeholder="Password dell'allarme..." id="psw"/>
+            <button onclick="alarm()" id="submit-button-alarm">Invia</button>
+            </div>
+          </div>
+        </div>
+      </div>
         <h1 class="title">Casa domotica</h1>
         <div class="utilities">
             <div class="utlity-container" id="temperature-container">
@@ -32,7 +46,7 @@
                     <div class="switches">
                         <!-- Toggle Button Style 11 -->
                         <label class="toggler-wrapper style-11">
-                          <input type="checkbox" id="allarme-switch" onchange="alarm()">
+                          <input type="checkbox" id="allarme-switch" onchange="showModal()">
                           <div class="toggler-slider">
                             <div class="toggler-knob"></div>
                           </div>
@@ -99,8 +113,10 @@
                     <!-- End Toggle Button Style 11 -->
                 </div>
                 <h3>Basculante:</h3>
-                <input type="range" min="0" max="5" value="0" id="basculante-slider">
-                <button onclick="getBasculante()" id="submit-button">Invia</button>
+                <div class="input-basculante">
+                  <input type="range" min="0" max="5" value="0" id="basculante-slider">
+                  <button onclick="getBasculante()" id="submit-button">Invia</button>
+                </div>
             </div>
         </div>
     </body>

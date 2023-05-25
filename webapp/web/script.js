@@ -57,7 +57,32 @@ function getBasculante(){
     $("#submit-button").prop('disabled', false);
   }, waitTime);
 }
+function showModal() {
+  const modal=document.getElementById("modal");
+  modal.style.display="flex";
+  const alarmSwitch=document.getElementById("allarme-switch");
+  if(alarmSwitch.checked)
+    alarmSwitch.checked=false;
+  else
+    alarmSwitch.checked=true;
+}
+function hideModal(){
+  const modal=document.getElementById("modal");
+  modal.style.display="none";
+}
 function alarm(){
+  psw=document.getElementById("psw").value;
+  if(psw!="1234"){
+    hideModal();
+    alert("Password sbagliata!");
+    return;
+  }
+  hideModal();
+  const alarmSwitch=document.getElementById("allarme-switch");
+  if(alarmSwitch.checked)
+    alarmSwitch.checked=false;
+  else
+    alarmSwitch.checked=true;
   if(states[4].state==0){
     states[4].state=1;
     const slider=document.getElementById("basculante-slider");
@@ -68,4 +93,5 @@ function alarm(){
     states[4].state=0;
     eel.stopAlarm();
   }
+  eel.toggleAlarm();
 }

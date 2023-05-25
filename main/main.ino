@@ -79,6 +79,7 @@ class Garage:public Room{
 String message = "";
 //STANZE
 bool alarmActive=false;
+bool alarmIsOn=false;
 int buzzerPin=9;
 Room cucina(3); //digital pin 3
 Room bagno(4);
@@ -105,6 +106,7 @@ static bool measure_environment( float *temperature, float *humidity )
 void setup() {
   //inizializzo i pin
   pinMode(buzzerPin, OUTPUT);
+  noTone(buzzerPin);
   pinMode(cucina.getPin(), OUTPUT);
   pinMode(bagno.getPin(), OUTPUT);
   pinMode(camera.getPin(), OUTPUT);
@@ -142,6 +144,8 @@ void loop() {
       }else if(message=="stopAlarm"){
         alarmActive=false;
         noTone(buzzerPin);
+      }else if(message=="toggleAlarm"){
+          alarmIsOn=!alarmIsOn;
       }
       message = "";
     }else{
@@ -154,7 +158,7 @@ void loop() {
 }
 
 void getAllStates(){
-  String state = String(cucina.getStatus())+","+String(bagno.getStatus())+","+String(camera.getStatus())+","+String(garage.getStatus())+","+String(alarmActive)+","+String(garage.getApertura());
+  String state = String(cucina.getStatus())+","+String(bagno.getStatus())+","+String(camera.getStatus())+","+String(garage.getStatus())+","+String(alarmIsOn)+","+String(garage.getApertura());
   Serial.println(state);
   connection();
 }
@@ -162,7 +166,7 @@ void suonaAllarme(){
   tone(buzzerPin, 262); // Puoi modificare la frequenza per cambiare il suono dell'allarme
   delay(500);
   tone(buzzerPin, 494);
-  delay(500); // Pausa tra un'allarme e l'altro
+  delay(500);
 }
 
 void connection(){

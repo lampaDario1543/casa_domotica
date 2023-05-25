@@ -29,6 +29,10 @@ def stopAlarm():
     data="stopAlarm "
     bluetooth.write(data.encode())
 @eel.expose
+def toggleAlarm():
+    data="toggleAlarm "
+    bluetooth.write(data.encode())
+@eel.expose
 def getTemperature():
     bluetooth.write("getTemp ".encode())
     data = bluetooth.readline().decode().strip()
