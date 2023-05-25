@@ -9,7 +9,8 @@ function init(){
       states[1]={room:"bagno",state:result[1]};
       states[2]={room:"camera",state:result[2]};
       states[3]={room:"garage",state:result[3]};
-      states[4]={room:"basculante",state:result[4]};
+      states[4]={room:"allarme",state:result[4]};
+      states[5]={room:"basculante",state:result[5]};
       for(let i=0;i<states.length-1;i++){ //fino a states.length-1 perchè l'ultimo elemento è la basculante
         if(states[i].state==1){
           $("#"+states[i].room+"-switch").prop('checked', true);
@@ -36,13 +37,35 @@ function getTemperature() {
     document.getElementById("humidity").innerText = humidity;
   })
 }
-setInterval(getTemperature, 5000);//richiede la temperatura ogni 5 secondi
-
+setInterval(getTemperature, 10000);//richiede la temperatura ogni 10 secondi
+var waitTime=0;
+var preValue=0;
 function getBasculante(){
-  $("#submit-button").prop('disabled', true);
   const slider=document.getElementById("basculante-slider");
-  eel.setBasculante(slider.value);
+  value=slider.value;
+  if(states[4].state==1){
+    if(value>0){
+      eel.alarm();
+    }
+    return;
+  }
+  $("#submit-button").prop('disabled', true);
+  waitTime= Math.abs(value-preValue)*1600; //ogni 20% aspetta 1.5 secondi
+  preValue=value;
+  eel.setBasculante(value);
   setTimeout(() => {
     $("#submit-button").prop('disabled', false);
-  }, 5000);
+  }, waitTime);
+}
+function alarm(){
+  if(states[4].state==0){
+    states[4].state=1;
+    const slider=document.getElementById("basculante-slider");
+    slider.value=0;
+    eel.setBasculante(0);
+  }
+  else{
+    states[4].state=0;
+    eel.stopAlarm();
+  }
 }

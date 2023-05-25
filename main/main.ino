@@ -78,6 +78,8 @@ class Garage:public Room{
 //Bluetooth
 String message = "";
 //STANZE
+bool alarmActive=false;
+int buzzerPin=9;
 Room cucina(3); //digital pin 3
 Room bagno(4);
 Room camera(5);
@@ -99,12 +101,10 @@ static bool measure_environment( float *temperature, float *humidity )
 
   return( false );
 }
-//inizializzazione
-void initialize(){
-}
 //setup
 void setup() {
   //inizializzo i pin
+  pinMode(buzzerPin, OUTPUT);
   pinMode(cucina.getPin(), OUTPUT);
   pinMode(bagno.getPin(), OUTPUT);
   pinMode(camera.getPin(), OUTPUT);
@@ -112,8 +112,6 @@ void setup() {
   //imposto la velocità di trasmissione
   Serial.begin(115200);
   BTSerial.begin(115200);
-  //inizializzo
-  initialize();
 }
 //loop
 void loop() {
@@ -139,15 +137,49 @@ void loop() {
         int n= numeroString.toInt();
         n*=20; //numero in percentuale
         garage.setBasculante(n);
+      }else if(message=="playAlarm"){
+          alarmActive=true;
+      }else if(message=="stopAlarm"){
+        alarmActive=false;
+        noTone(buzzerPin);
       }
       message = "";
     }else{
       message += c;
     }
   }
+   if (alarmActive) {
+    suonaAllarme();
+   }
 }
 
 void getAllStates(){
-  String state = String(cucina.getStatus())+","+String(bagno.getStatus())+","+String(camera.getStatus())+","+String(garage.getStatus())+","+String(garage.getApertura());
+  String state = String(cucina.getStatus())+","+String(bagno.getStatus())+","+String(camera.getStatus())+","+String(garage.getStatus())+","+String(alarmActive)+","+String(garage.getApertura());
   Serial.println(state);
+  connection();
+}
+void suonaAllarme(){
+  tone(buzzerPin, 262); // Puoi modificare la frequenza per cambiare il suono dell'allarme
+  delay(500);
+  tone(buzzerPin, 494);
+  delay(500); // Pausa tra un'allarme e l'altro
+}
+
+void connection(){
+  const int melody[] = {
+    659, 659, 0, 659, 0, 523, 659, 0, 784, 0, 392
+  };
+  const int noteDurations[] = {
+    200, 200, 200, 200, 200, 200, 200, 200, 200, 200, 400, 200
+  };
+  const int melodyLength = sizeof(melody) / sizeof(melody[0]);
+  for (int i = 0; i < melodyLength; i++) {
+    if (melody[i] == 0) {
+      delay(noteDurations[i]);
+    } else {
+      tone(buzzerPin, melody[i], noteDurations[i]);
+    }
+    delay(noteDurations[i]*0.6);
+    noTone(buzzerPin);
+  }
 }
