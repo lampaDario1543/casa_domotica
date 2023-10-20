@@ -1,3 +1,2 @@
-# casa_domotica
-Casa domotica telecomunicazioni
-Ciaooo
+# Casa domotica tele
+Codice backend e frontend della casa domotica (progetto telecomunicazioni).
